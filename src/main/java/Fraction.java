@@ -1,6 +1,15 @@
 public class Fraction {
 
-    public static String GetFraction(int molecule,int denominator){
+    public int molecule;
+    public int demoninator;
+
+    public Fraction(int molecule, int demoninator) {
+        this.molecule = molecule;
+        this.demoninator = demoninator;
+    }
+
+
+    public static String GetFraction(int molecule, int denominator){
         if(denominator==0) {
             throw new RuntimeException("分母不能为0");
         }
