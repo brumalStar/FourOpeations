@@ -6,10 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FourOpeations" />
-        <module name="partner1.0" />
         <module name="partner" />
-        <module name="FourOperations" />
+        <module name="partner2.0" />
       </profile>
     </annotationProcessing>
   </component>
