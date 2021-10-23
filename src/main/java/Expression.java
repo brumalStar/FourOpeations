@@ -10,7 +10,7 @@ public class Expression {
     public static void GetExpression(){//获得随机生成的表达式
         for(int i=1;i<=Main.OperatorNumber;i++)
         {
-            String question=Getquestion()+"=";
+            String question=GetQuestion()+"=";
             String result=Calculator.Calculate(question);
 
             try {
@@ -29,7 +29,7 @@ public class Expression {
         }
     }
 
-    private static String Getquestion(){
+    private static String GetQuestion(){
         int operatorNum = ran.nextInt(3) + 1;//操作符号个数
         StringBuilder builder=new StringBuilder();
         int molecule=ran.nextInt(Main.range);
