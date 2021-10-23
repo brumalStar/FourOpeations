@@ -8,23 +8,29 @@ public class Expression {
     private static final char[] symbol = new char[]{'+', '-', '*', '÷'};
 
     public static void GetExpression() {//获得随机生成的表达式
-        for (int i = 1; i <= Main.OperatorNumber; i++) {
+        int i = 1;
+        while (i <= Main.OperatorNumber) {
+
             String question = GetQuestion() + "=";
+
             String result = Calculator.Calculate(question);
 
-            try {
-                String FinalQuestion = "第" + i + "道题目: " + question;
-                WriteUtil.write(Main.QuestionPath, FinalQuestion);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (result != null) {
+                try {
+                    String FinalQuestion = "第" + i + "道题目: " + question;
+                    WriteUtil.write(Main.QuestionPath, FinalQuestion);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    String FinalResult = "第" + i + "道答案: " + result;
+                    WriteUtil.write(Main.AnswerPath, FinalResult);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    i++;
+                }
             }
-//            try {
-//                String FinalResult="第"+i+"道题目: "+result;
-//                WriteUtil.write(Main.QuestionPath,result);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
         }
     }
 

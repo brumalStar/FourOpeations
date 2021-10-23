@@ -7,11 +7,13 @@ public class Calculator {  //计算表达式
     public static Stack<Fraction> fractionStack = null;//用来存放分数
     public static Stack<Integer> NumStack = null;
     public static boolean BiggerFlag = false;
-    public static Stack<Character> bracketStack= null;
+    public static Stack<Character> bracketStack = null;
 
 
     public static String Calculate(String question) {
-        fractionStack = new Stack<Fraction>();//
+        question = removeStrSpace(question);
+        BiggerFlag = false;
+        fractionStack = new Stack<Fraction>();
         operationStack = new Stack<Character>();
         NumStack = new Stack<Integer>();
         //用来存放括号
@@ -22,27 +24,26 @@ public class Calculator {  //计算表达式
         for (int i = 0; i < length; i++) {
             char temp = question.charAt(i);
             if (isNumber(temp)) nowFractionNum.append(temp);//如果是数字就放入到builder之中
-            else if (temp=='(') {
+            else if (temp == '(') {
                 //括号情况(如果出现左括号，说明前面的数已经是完毕了的，就生成然后装填)
-                if(!NumStack.empty()) {
+                if (!NumStack.empty()) {
                     int demoninator = 1;
                     int molecule = NumStack.pop();
                     fractionStack.push((new Fraction(molecule, demoninator)));
                 }
-                i=DealBracket(i,question);
-                if(i==-1) return null;
+                i = DealBracket(i, question);
+                if (i == -1) return null;
             } else if (temp == '’') {
                 StringToNum(nowFractionNum);
                 aux = NumStack.pop(); //得出真分数的真值；
 
-            }else if(temp=='/'){
+            } else if (temp == '/') {
                 operationStack.push('/');
                 StringToNum(nowFractionNum);
-            }
-            else { //其他符号
-                if(nowFractionNum.length()!=0)
+            } else { //其他符号
+                if (nowFractionNum.length() != 0)
                     StringToNum(nowFractionNum); //得出数字并且压入栈
-                if (!operationStack.empty()&&operationStack.peek() == '/') {
+                if (!operationStack.empty() && operationStack.peek() == '/') {
                     operationStack.pop();
                     int demoninator = NumStack.pop();
                     int molecule = NumStack.pop();
@@ -54,32 +55,35 @@ public class Calculator {  //计算表达式
 //                if(temp!='=')
 //                    operationStack.push(temp);//将符号压入栈
 
-                if (!NumStack.empty())
-                {
-                    int demoninator=1;
-                    int molecule=NumStack.pop();
+                if (!NumStack.empty()) {
+                    int demoninator = 1;
+                    int molecule = NumStack.pop();
 
                     fractionStack.push((new Fraction(molecule, demoninator)));
                 }
-                if (fractionStack.size() > 1&&!operationStack.empty()&&(operationStack.peek()=='*'||operationStack.peek()=='÷')) {
+                if (fractionStack.size() > 1 && !operationStack.empty() && (operationStack.peek() == '*' || operationStack.peek() == '÷')) {
                     operator();
-                    if(BiggerFlag) return null;
+                    if (BiggerFlag) return null;
                 }
-                if(temp!='=')
+                if (temp != '=')
                     operationStack.push(temp);//将符号压入栈
-                else{
-                    while(!operationStack.empty()){
+                else {
+                    while (!operationStack.empty()) {
                         operator();
-                        if(BiggerFlag) return null;
+                        if (BiggerFlag) return null;
                     }
                 }
             }
         }
         if (fractionStack.size() == 1 && bracketStack.empty()) {
             Fraction result = fractionStack.pop();
-            return Fraction.GetFraction(result.molecule,result.demoninator);
+            return Fraction.GetFraction(result.molecule, result.demoninator);
         }
         return null;
+    }
+
+    private static String removeStrSpace(String str) {
+        return str != null ? str.replaceAll(" ", "") : "";
     }
 
     public static int DealBracket(int point, String question) { //返回处理表达式的长度
