@@ -19,6 +19,7 @@ public class WriteUtil {
         finally {
             try{
                 //输出流关闭
+                assert out != null;
                 out.close();
             }catch (IOException e){
                 System.out.println("输出流关闭失败");

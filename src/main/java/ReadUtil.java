@@ -1,17 +1,17 @@
 import java.io.*;
 
 public class ReadUtil {
-    public static String read(String path) throws IOException {
+    public static String read(String path) {
 
         //将读出的字符串用StringBuilder连接。
         StringBuilder builder = new StringBuilder();
-        String text=null;
-        File afile=new File(path);
+        String text;
+        File readFile=new File(path);
         //判断其是否为文件并且是否存在
         try{
             String encoding="UTF-8";
-            if(afile.isFile() && afile.exists()) { //判断读取的文件是否存在和是否为文件类型
-                FileInputStream fileInputStream = new FileInputStream(afile);
+            if(readFile.isFile() && readFile.exists()) { //判断读取的文件是否存在和是否为文件类型
+                FileInputStream fileInputStream = new FileInputStream(readFile);
                 InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, encoding);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 while ((text = bufferedReader.readLine()) != null) {
