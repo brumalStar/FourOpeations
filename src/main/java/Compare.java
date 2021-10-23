@@ -76,7 +76,7 @@ public class Compare {
         if (flag) builder.append("Correct: ");
         else builder.append("Wrong: ");
         int length = list.size();
-        builder.append(Integer.valueOf(length)).append("(");
+        builder.append(Integer.valueOf(length)).append(" (");
         int temp;
         for (int i = 0; i < length; i++) {
             temp = list.get(i);
