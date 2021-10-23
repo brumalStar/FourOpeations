@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
@@ -13,12 +14,17 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("请输入数值的取值范围: ");
-        range=sc.nextInt();
-        System.out.println("请输入表达式的生成条数: ");
-        OperatorNumber=sc.nextInt();
-        Expression.GetExpression();
-//     Compare.CompareTxt(Main.CopyPath,Main.AnswerPath);
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("请输入数值的取值范围: ");
+//        range=sc.nextInt();
+//        System.out.println("请输入表达式的生成条数: ");
+//        OperatorNumber=sc.nextInt();
+//        Expression.GetExpression();
+//        Compare.CompareTxt(Main.CopyPath,Main.AnswerPath);
+        OperationFrame frame = new OperationFrame();
+        frame.setSize(640,480);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }
