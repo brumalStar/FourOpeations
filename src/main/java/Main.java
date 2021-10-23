@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     //题目
-    public static final String QuestionPath="C:/Users/zyw12/Desktop/question.txt";
+    public static final String QuestionPath="Exercises.txt";
     //参考答案
-    public static final String AnswerPath="C:/Users/zyw12/Desktop/answers.txt";
+    public static final String AnswerPath="Answers.txt";
     //自己所写的答案
-    public static final String MyAnswerPath="C:/Users/zyw12/Desktop/answer.txt";
+    public static final String MyAnswerPath="MyAnswer.txt";
     //得分
-    public static final String GradePath="C:/Users/zyw12/Desktop/Grade.txt";
+    public static final String GradePath="Grade.txt";
 
 
     public static int range;//数值的取值范围

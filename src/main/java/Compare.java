@@ -19,7 +19,7 @@ public class Compare {
         File file2 = new File(path2);
         String text1;
         String text2;
-        int count = 0;
+        int count = 1;
         if (!file1.isFile() || !file2.isFile()) System.out.println("文件格式不符合要求");
         if (!file1.exists() || !file2.exists()) System.out.println("文件不存在，无法进行比较");
         try {
