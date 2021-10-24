@@ -1,3 +1,4 @@
+
 import java.util.Stack;
 
 public class Calculator {  //计算表达式
@@ -7,8 +8,6 @@ public class Calculator {  //计算表达式
     public static Stack<Fraction> fractionStack = null;//用来存放分数
     public static Stack<Integer> NumStack = null;//用来存放数字
     public static boolean BiggerFlag=false;//用来判断当前计算是否出现负数
-
-
 
 
     public static String Calculate(String question) {
@@ -145,6 +144,7 @@ public class Calculator {  //计算表达式
             case '-':
                 Compute.sub(x, y);
                 if(!isBigger())  BiggerFlag=true;//如果计算出负数就设置为true
+                //System.out.println("计算过程不能产生负数");
                 break;
             case '*':
                 Compute.mul(x, y);

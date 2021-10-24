@@ -12,6 +12,7 @@ public class Fraction {
     public static String GetFraction(int molecule, int denominator){
         if(denominator==0) {//判断当前分母是否为0
            Calculator.BiggerFlag=true;
+            System.out.println("分母不能为0");
            return null;
         }
         molecule=Math.abs(molecule);//求绝对值

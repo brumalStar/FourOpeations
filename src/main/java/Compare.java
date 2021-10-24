@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Compare {
 
+//    用于比较答案之间的差异
     public static void CompareTxt(String path1, String path2){ //比较两个文件的不同  1：自己的答案（短） 2：计算出的答案（长）
         //用来存放正确答案的下标
         List<Integer> rightIndex = new ArrayList<>();
@@ -63,13 +64,14 @@ public class Compare {
         }
     }
 
+//    将结果写入目标文件
     private static void WriteResult(List<Integer> list,boolean flag){
         StringBuilder builder=new StringBuilder();
         //判断当前是什么情况
         if(flag) builder.append("Correct: ");
         else builder.append("Wrong: ");
         int length=list.size();
-        builder.append(Integer.valueOf(length)).append("(");
+        builder.append(Integer.valueOf(length)).append(" (");
         int temp;
         //将结果写入缓冲区
         for(int i=0;i<length;i++){
@@ -81,24 +83,25 @@ public class Compare {
         }
         builder.append(")");
         //将结果写入目的文件
-        try {
-            WriteUtil.write(Main.GradePath,builder.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        WriteUtil.write(Main.GradePath,builder.toString());
     }
 
-
+//用于比较两棵树的情况
     public static boolean CompareTreeNode(TreeNode root1,TreeNode root2){
+        //首先判断根节点是否为空
         if(root1==null&&root2==null) return true;
         if(root1==null||root2==null) return false;
+//        System.out.println("root1----"+root1.getString());
+//        System.out.println("root2----"+root2.getString());
+        if(!root1.getString().equals(root2.getString())) return false;
 
-        if(root1.getString().equals("*")||root1.getString().equals("+")){
-            if(root1.getLeft()!=null&&root2.getRight()!=null&&root1.getLeft().getString().equals(root2.getRight().getString()))
-                return CompareTreeNode(root1.getLeft(),root2.getRight())&&CompareTreeNode(root1.getRight(),root2.getLeft());
-            if(root2.getLeft()!=null&&root1.getRight()!=null&&root2.getLeft().getString().equals(root1.getRight().getString()))
-                return CompareTreeNode(root2.getLeft(),root1.getRight())&&CompareTreeNode(root2.getRight(),root1.getLeft());
+//        根据乘法和加法的结合律判断当前情况是否是相同式子
+        if(root1.getString().equals("* ")||root1.getString().equals("+ ")){
+
+            return (CompareTreeNode(root1.getLeft(),root2.getLeft())&&CompareTreeNode(root1.getRight(),root2.getRight()))||
+                    (CompareTreeNode(root1.getRight(),root2.getLeft())&&CompareTreeNode(root1.getLeft(),root2.getRight()));
         }
+
         return CompareTreeNode(root1.getLeft(),root2.getLeft())&&CompareTreeNode(root1.getRight(),root2.getRight());
 
     }

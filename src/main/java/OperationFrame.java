@@ -12,7 +12,7 @@ public class OperationFrame extends JFrame {
         JTextField jTextField2=new JTextField();
 
         JPanel northPanel = new JPanel();
-        northPanel.setLayout(new GridLayout(4,3,5,5));
+        northPanel.setLayout(new GridLayout(4,3));
         northPanel.add(new JLabel("数值范围", SwingConstants.LEFT));
         northPanel.add(jTextRange);
         northPanel.add(new JLabel("生成题目数量", SwingConstants.LEFT));
@@ -47,8 +47,9 @@ public class OperationFrame extends JFrame {
         });
 
         CompareButton.addActionListener(event->{
-
-            Compare.CompareTxt(jTextField1.getText().trim(),jTextField2.getText().trim());
+           String path1=jTextField1.getText().trim();
+           String path2=jTextField2.getText().trim();
+            Compare.CompareTxt(path1,path2);
             textArea.append("比较完成\n");
         });
 

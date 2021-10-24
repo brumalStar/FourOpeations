@@ -1,4 +1,4 @@
-import java.io.IOException;
+
 import java.util.*;
 
 public class Expression {
@@ -15,36 +15,45 @@ public class Expression {
            while(i<=Main.OperatorNumber) {
 
                String question = GetQuestion() + "=";
+//               判断当前生成的表达式是否已经存在（二叉树方法）
+               //System.out.println("生成的式子为  "+question);
                TreeNode root= ConstructTree.buildTree(question);
+
+
                int size=question.length();
+//               因为二叉树中不存在括号。所以要特殊判断
                if(question.contains("(")){
                    size-=2;
                }
-
+//              根据式子的长度，得到对应的映射。映射中包含该长度式子的所有根节点
                List<TreeNode> treeNodes=map.get(size);
+//               List如果为空，就初始化List
                if(treeNodes==null)
                {
                    map.put(size,new LinkedList<>());
                    treeNodes=map.get(size);
-
                }
 
                   else{
+//                  如果不为空。则循环遍历List
                       for (TreeNode treeNode : treeNodes) {
                           //如果不存在就加入，并计算结果，如果存在就提前结束
-                          if (Compare.CompareTreeNode(root, treeNode))
-                          {
-                              flag=true;
-                              break;
-                          }
-                      }
+                          if(root.getString().equals(treeNode.getString())) {
+                              if (Compare.CompareTreeNode(root, treeNode)) {
 
+                                  flag = true;
+                                  break;
+                              }
+                          }
+
+                      }
                       if(flag) {
                           flag=false;
                           continue;
                       }
 
                   }
+//                  将这个式子将入到map中
                treeNodes.add(root);
                map.put(size,treeNodes);
 
@@ -54,17 +63,12 @@ public class Expression {
               //如果结果不为null（即符合题目要求）
 
                if (result != null) {
-                   try {
-                       String FinalQuestion = "第" + i + "道题目: " + question;
-                       WriteUtil.write(Main.QuestionPath, FinalQuestion);
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
+//                   将结果写入到文件中
+                   String FinalQuestion = "第" + i + "道题目: " + question;
+                   WriteUtil.write(Main.QuestionPath, FinalQuestion);
                    try {
                        String FinalResult = "第" + i + "道答案: " + result;
                        WriteUtil.write(Main.AnswerPath, FinalResult);
-                   } catch (IOException e) {
-                       e.printStackTrace();
                    } finally {
                        i++;
                    }
